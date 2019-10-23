@@ -8,13 +8,14 @@ import cats.~>
 import scala.util.Try
 
 class Runit {
+
   implicit object OptionFunc extends Funct2[Try] {
     override def test: Try[Int] = Try(1)
   }
 
   implicit val fk: Try ~> Option = λ[Try ~> Option](_.toOption)
 
-  OptionFunc.mapK(fk)
+  Funct2.functorKForFunct2
 
   val fk2 = FunctorK[Funct2]
 
