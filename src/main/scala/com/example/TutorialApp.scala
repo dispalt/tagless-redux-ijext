@@ -11,6 +11,6 @@ object TutorialApp {
   def main(args: Array[String]): Unit = {
     println("FOOOO")
     println("Hello world!")
-    ReactDOM.render(Comp(n = "foo"), document.getElementById("root"))
+    ReactDOM.render(Comp(""), document.getElementById("root"))
   }
 }

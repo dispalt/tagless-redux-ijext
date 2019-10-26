@@ -10,3 +10,4 @@ import slinky.web.html.h1
 
   override def render(): ReactElement = h1("Hello")
 }
+

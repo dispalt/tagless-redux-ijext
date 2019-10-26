@@ -1,5 +1,6 @@
 val reduxV  = "0.3.1"
 val slinkyV = "0.6.3"
+val slinkRelayV = "0.22.4"
 
 lazy val testP = (project in file("."))
   .settings(
@@ -10,9 +11,12 @@ lazy val testP = (project in file("."))
     scalacOptions ++= commonScalacOptions,
     // This is an application with a main method
     scalaJSUseMainModuleInitializer := true,
-    libraryDependencies += "me.shadaj" %%% "slinky-core" % slinkyV, // core React functionality, no React DOM
-    libraryDependencies += "me.shadaj" %%% "slinky-web"  % slinkyV, // React DOM, HTML and SVG tags
-    libraryDependencies += "me.shadaj" %%% "slinky-hot"  % slinkyV // Hot loading, requires react-proxy package
+    libraryDependencies ++= Seq(
+      "me.shadaj"         %%% "slinky-core" % slinkyV, // core React functionality, no React DOM
+      "me.shadaj"         %%% "slinky-web"  % slinkyV, // React DOM, HTML and SVG tags
+      "me.shadaj"         %%% "slinky-hot"  % slinkyV, // Hot loading, requires react-proxy package
+      "com.dispalt.relay" %%% "slinky-relay"  % slinkRelayV // Hot loading, requires react-proxy package
+    )
   )
   .enablePlugins(ScalaJSPlugin)
 
@@ -33,7 +37,8 @@ lazy val commonScalacOptions = Seq(
   "-Ywarn-value-discard",
   "-Ywarn-unused-import",
   "-Ypartial-unification",
-  "-Xsource:2.13"
+  "-Xsource:2.13",
+  "-P:scalajs:sjsDefinedByDefault"
 )
 
 lazy val macroSettings: Seq[Def.Setting[_]] = Seq(
